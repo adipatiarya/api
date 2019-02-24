@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Model;
-use App\Model\Review;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,4 +10,5 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+
 }

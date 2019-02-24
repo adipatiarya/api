@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Product;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\Resource;
 
-class ProductCollection extends JsonResource
+class ProductCollection extends Resource
 {
     /**
      * Transform the resource collection into an array.
@@ -22,7 +22,7 @@ class ProductCollection extends JsonResource
             'rating' => $this->reviews->count() > 0 ? round($this->reviews->avg('star'),2):'Not Rating yet',
 
             'discount'=> $this->discount,
-            
+
             'href' => [
                 'link'=>route('products.show', $this->id)
             ]
