@@ -13,9 +13,9 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($product)
+    public function index(Product $product)
     {
-        return ReviewResource::collection(Product::findOrFail($product)->reviews);
+        return ReviewResource::collection($product->reviews);
     }
 
     /**
@@ -45,9 +45,9 @@ class ReviewController extends Controller
      * @param  \App\Model\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show(Review $review, $data)
     {
-        //
+        return 'hi';
     }
 
     /**
