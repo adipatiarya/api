@@ -5,9 +5,17 @@ use App\Http\Resources\ReviewResource;
 use App\Model\Review;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReviewRequest;
+use Illuminate\Http\Response;
+use Auth;
+
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +42,17 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request, Product $product)
     {
-        //
+        $review = new Review($request->all());
+
+        $review['customer']=Auth::user()->name;
+
+        $product->reviews()->save($review);
+
+        return response([
+            'data'=>new ReviewResource($review)
+        ], Response::HTTP_CREATED);
     }
 
     /**
